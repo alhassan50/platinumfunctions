@@ -1,0 +1,10 @@
+post http://localhost:8888/.netlify/functions/contact
+Content-Type: application/json
+
+{
+    "fullName": "alhassan",
+    "email": "abdullahialhassanbaaba@gmail.com",
+    "phoneNumber": "   ",
+    "subject": "hola",
+    "message": "testing from vs extensionn"
+}
