@@ -51,3 +51,57 @@ exports.validateMessage = (message) => {
     }
     return null; // Validation passed
 }
+
+exports.validateHostelLocation = (hostelLocation) => {
+    /* if (hostelLocation == null || ) {
+        return "Hostel Location is required"
+    } */
+
+    /* console.log("v: ", hostelLocation);
+    console.log("hostelLocation.toLowerCase() !== 'bomso': ", hostelLocation.toLowerCase() !== 'bomso');
+    console.log("hostelLocation.toLowerCase() !== 'ayeduase': ", hostelLocation.toLowerCase() !== 'ayeduase');
+    console.log("hostelLocation.toLowerCase() !== 'gaza': ", hostelLocation.toLowerCase() !== 'gaza'); */
+
+    if (
+        hostelLocation == null ||
+        (hostelLocation.toLowerCase() !== 'bomso' &&
+         hostelLocation.toLowerCase() !== 'ayeduase' &&
+         hostelLocation.toLowerCase() !== 'gaza')
+    ) {
+        return "Invalid hostel location.";
+    }
+    return null; // Validation passed
+}
+
+exports.validateRoomType = (roomType) => {
+    /* console.log("v: ", roomType);
+    console.log("roomType == null: ", roomType == null);
+    console.log("roomType.toLowerCase() !== 'single': ", roomType.toLowerCase() !== 'single');
+    console.log("roomType.toLowerCase() !== 'shared': ", roomType.toLowerCase() !== 'shared'); */
+
+    if ( roomType == null ||
+        (roomType.toLowerCase() !== 'single' && 
+        roomType.toLowerCase() !== 'double' && 
+        roomType.toLowerCase() !== 'shared')
+    ) {
+        return "Invalid room type.";
+    }
+    return null; // Validation passed
+}
+
+exports.validateGender = (gender) => {
+    /* console.log("v: ", gender);
+    console.log("gender.toLowerCase() !== 'male': ", gender.toLowerCase() !== 'male');
+    console.log("gender.toLowerCase() !== 'female': ", gender.toLowerCase() !== 'female');
+    console.log("(gender.toLowerCase() !== 'male' && gender.toLowerCase() !== 'female')", (gender.toLowerCase() !== 'male' && gender.toLowerCase() !== 'female')); */
+
+    if ( gender == null ||
+        (gender.toLowerCase() !== 'male' && 
+        gender.toLowerCase() !== 'female')
+    ) {
+        return "Invalid hostel location.";
+    }
+    return null; // Validation passed
+}
+
+

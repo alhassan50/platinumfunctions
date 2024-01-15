@@ -24,6 +24,8 @@ const validateContactFormData = (contactFormData) => {
 
     /* console.log("invalidFields ", invalidFields); */
 
+    console.log(validationResults);
+
     if (invalidFields.length > 0) {
         // Return an object with detailed error messages
         return {

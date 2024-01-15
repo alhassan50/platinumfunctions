@@ -19,7 +19,7 @@ const corsHeaderOptions = {
 
 exports.handler = async (event) => {
 
-    // Handle OPTIONS request
+    // Handle OPTIONS request (preflight)
     if (event.httpMethod === 'OPTIONS') {
         return {
             statusCode: 204,
