@@ -35,10 +35,6 @@ exports.handler = async (event) => {
         // Retrieve query parameters
         const { hostelLocation, roomType, gender } = event.queryStringParameters;
 
-        /* console.log(hostelLocation);
-        console.log(roomType);
-        console.log(gender); */
-
         const areRoomsQueryParams = validateAvailableRoomsParams(hostelLocation, roomType, gender).isValid
 
         if (!areRoomsQueryParams) {
