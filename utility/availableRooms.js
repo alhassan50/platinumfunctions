@@ -12,7 +12,7 @@ const availableRooms = async (hostelLocation, roomType, gender) => {
 
     const data = [];
     snapshot.forEach((doc) => {
-        data.push({ ...doc.data(), docId: doc.id });
+        data.push({ ...doc.data(), roomID: doc.id });
     });
 
     return data;

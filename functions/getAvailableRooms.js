@@ -62,7 +62,4 @@ exports.handler = async (event) => {
             body: JSON.stringify({ error: `Couldn't fetch rooms. ${error}`})
         };
     }
-
-    
-    
 }
