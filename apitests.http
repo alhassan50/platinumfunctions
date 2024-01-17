@@ -1,1 +1,2 @@
-get http://localhost:8888/.netlify/functions/getAvailableRooms?hostelLocation=ayeduase&roomType=single&gender=male
+get http://localhost:8888/.netlify/functions/getAvailableRooms?hostelLocation=ayeduase&roomType=single&gender=female
+Content-Type: application/json
