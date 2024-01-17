@@ -1,5 +1,4 @@
 const db = require("../config/firebaseAdminConfig");
-const validation = require("../utility/validation");
 
 const availableRooms = async (hostelLocation, roomType, gender) => {
     let query = db.collection("rooms")

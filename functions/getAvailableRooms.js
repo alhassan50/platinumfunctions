@@ -2,15 +2,13 @@ const cors = require("cors");
 require('dotenv').config();
 const validation = require("../utility/validation")
 const validateAvailableRoomsParams = require("../utility/validateAvailableRoomsParams")
-
-//fake data
 const availableRooms = require("../utility/availableRooms")
 
 const corsHeaderOptions = {
-    //'Access-Control-Allow-Origin': 'http://localhost:3000',
-    'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
+    'Access-Control-Allow-Origin': 'http://localhost:3000',
+    //'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Headers': 'Content-Type',
 };
 
 exports.handler = async (event) => {
