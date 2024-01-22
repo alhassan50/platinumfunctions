@@ -37,7 +37,7 @@ exports.handler = async (event) => {
         };
     } 
     
-    // Handle POST request
+    // Handle bodyless request
     if (!event.body) {
         return {
             statusCode: 401,
