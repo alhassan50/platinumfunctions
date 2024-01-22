@@ -68,7 +68,7 @@ exports.handler = async (event) => {
             body: JSON.stringify(bookingSummary)
         };
     } catch (error) {
-        console.log(error)
+        //console.log(error)
         return {
             statusCode: 401,
             headers: corsHeaderOptions,

@@ -112,7 +112,7 @@ exports.handler = async (event) => {
             body: JSON.stringify({ message: 'Your message has been sent successfully. Check you gmail inbox from time to time for a reply. Thank you!', info}),
         };
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         return {
             statusCode: 403,
             headers: corsHeaderOptions,

@@ -56,10 +56,10 @@ exports.handler = async (event) => {
         }
 
         const studentRoomID = await getStudentRoomID(studentID);
-        console.log("studentRoomID: ", studentRoomID);
+        //console.log("studentRoomID: ", studentRoomID);
 
         const room = await getRoom(studentRoomID);
-        console.log(room);
+        //console.log(room);
    
         if (room.error) {
             throw new Error(`${room.error}`)
@@ -71,7 +71,7 @@ exports.handler = async (event) => {
             body: JSON.stringify(room)
         };
     } catch (error) {
-        console.log(error)
+        //console.log(error)
         return {
             statusCode: 401,
             headers: corsHeaderOptions,

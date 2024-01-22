@@ -7,7 +7,7 @@ const authenticateUser = async (userTokenID) => {
     //console.log('uid:', uid);
     return uid;
   } catch (error) {
-    console.log("error: ", error);
+    //console.log("error: ", error);
     throw error;
   }
 };

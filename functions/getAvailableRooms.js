@@ -44,7 +44,7 @@ exports.handler = async (event) => {
         // Use query parameters in your logic
         const availableRoomsArray = await availableRooms(hostelLocation, roomType, gender);
 
-        console.log(availableRoomsArray);
+        //console.log(availableRoomsArray);
         
         return {
             statusCode: 200,
@@ -52,7 +52,7 @@ exports.handler = async (event) => {
             body: JSON.stringify({ availableRooms: availableRoomsArray})
         };
     } catch (error) {
-        console.log(error)
+        //console.log(error)
         return {
             statusCode: 401,
             headers: corsHeaderOptions,
