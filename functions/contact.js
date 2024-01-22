@@ -31,7 +31,7 @@ exports.handler = async (event) => {
     // Handles request that aren't POST
     if (event.httpMethod !== 'POST') {
         return {
-            statusCode: 404,
+            statusCode: 405,
             headers: corsHeaderOptions,
             body: JSON.stringify({ error: 'Request Method Denied'})
         };
@@ -40,7 +40,7 @@ exports.handler = async (event) => {
     // Handle bodyless request
     if (!event.body) {
         return {
-            statusCode: 401,
+            statusCode: 400,
             headers: corsHeaderOptions,
             body: JSON.stringify({ error: 'Empty request body.' }),
         };
@@ -56,7 +56,7 @@ exports.handler = async (event) => {
         }
     } catch (error) {
         return {
-            statusCode: 402,
+            statusCode: 400,
             headers: corsHeaderOptions,
             body: JSON.stringify({ error: `${error}` }),
         };
@@ -71,9 +71,9 @@ exports.handler = async (event) => {
     } catch (error) {
         /* console.log(error); */
         return {
-            statusCode: 408,
+            statusCode: 500,
             headers: corsHeaderOptions,
-            body: JSON.stringify({ error: `${error}` }),
+            body: JSON.stringify({ error: `Failed to create access token. Error: ${error}` }),
         };
     }
     
@@ -114,9 +114,9 @@ exports.handler = async (event) => {
     } catch (error) {
         //console.log(error);
         return {
-            statusCode: 403,
+            statusCode: 500,
             headers: corsHeaderOptions,
-            body: JSON.stringify({ error: `Failed to send message: ${error}` }),
+            body: JSON.stringify({ error: `Failed to send email.` }),
         };
     }
 }

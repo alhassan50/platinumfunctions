@@ -23,20 +23,36 @@ exports.handler = async (event) => {
     // Handles request that aren't POST
     if (event.httpMethod !== 'GET') {
         return {
-            statusCode: 404,
+            statusCode: 405,
             headers: corsHeaderOptions,
             body: JSON.stringify({ error: 'Request Method Denied'})
         };
+    }
+
+    if (event.body) {
+        return {
+            statusCode: 400,
+            headers: corsHeaderOptions,
+            body: JSON.stringify({ error: 'Non empty request body'})
+        }
     }
 
     try {
         // Retrieve query parameters
         const { hostelLocation, roomType, gender } = event.queryStringParameters;
 
-        const areRoomsQueryParams = validateAvailableRoomsParams(hostelLocation, roomType, gender).isValid
-
-        if (!areRoomsQueryParams) {
-            throw new Error(`Invalid Query Parameters.`)
+        try {
+            const areRoomsQueryParams = validateAvailableRoomsParams(hostelLocation, roomType, gender).isValid
+    
+            if (!areRoomsQueryParams) {
+                throw new Error(`Invalid query parameters.`)
+            }
+        } catch (error) {
+            return {
+                statusCode: 400,
+                headers: corsHeaderOptions,
+                body: JSON.stringify({ error: `${error}`})
+            }
         }
 
         const availableRoomsArray = await availableRooms(hostelLocation, roomType, gender);
@@ -51,9 +67,9 @@ exports.handler = async (event) => {
     } catch (error) {
         //console.log(error)
         return {
-            statusCode: 401,
+            statusCode: 500,
             headers: corsHeaderOptions,
-            body: JSON.stringify({ error: `Couldn't fetch rooms. ${error}`})
+            body: JSON.stringify({ error: `Failed to fetch rooms.`})
         };
     }
 }

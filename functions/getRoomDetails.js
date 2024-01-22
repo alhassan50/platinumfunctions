@@ -4,8 +4,8 @@ const getStudentRoomID = require("../utility/getStudentRoomID")
 const authenticateUser = require("../utility/authenticateUser")
 
 const corsHeaderOptions = {
-    'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
-    //'Access-Control-Allow-Origin': 'http://localhost:3000',
+    //'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
+    'Access-Control-Allow-Origin': 'http://localhost:3000',
     //'Access-Control-Allow-Origin': ['http://localhost:3000', 'https://platinumhostels.vercel.app'],
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
@@ -23,7 +23,7 @@ exports.handler = async (event) => {
     // Handles request that aren't POST
     if (event.httpMethod !== 'POST') {
         return {
-            statusCode: 401,
+            statusCode: 405,
             headers: corsHeaderOptions,
             body: JSON.stringify({ error: 'Request Method Denied'})
         };
@@ -32,7 +32,7 @@ exports.handler = async (event) => {
     // Handle bodyless request
     if (!event.body) {
         return {
-            statusCode: 401,
+            statusCode: 400,
             headers: corsHeaderOptions,
             body: JSON.stringify({ error: 'Empty request body.' }),
         };
@@ -51,7 +51,7 @@ exports.handler = async (event) => {
             return {
                 statusCode: 401,
                 headers: corsHeaderOptions,
-                body: JSON.stringify({ error: 'user not authenticated.' }),
+                body: JSON.stringify({ error: 'Unauthorized user.' }),
             };
         }
 
@@ -73,9 +73,9 @@ exports.handler = async (event) => {
     } catch (error) {
         //console.log(error)
         return {
-            statusCode: 401,
+            statusCode: 500,
             headers: corsHeaderOptions,
-            body: JSON.stringify({ error: `Couldn't get room. ${error}`})
+            body: JSON.stringify({ error: `Failed to get room details.`})
         };
     }
 }
