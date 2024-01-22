@@ -1,7 +1,7 @@
-const db = require("../config/firebaseAdminConfig");
+const firebaseAdminConfig = require("../config/firebaseAdminConfig");
 
 const availableRooms = async (hostelLocation, roomType, gender) => {
-    let query = db.collection("rooms")
+    let query = firebaseAdminConfig.db.collection("rooms")
         .where("hostelLocation", "==", hostelLocation)
         .where("roomType", "==", roomType)
         .where("gender", "==", gender)
