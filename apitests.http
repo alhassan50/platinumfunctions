@@ -1,6 +1,15 @@
-post http://localhost:8888/.netlify/functions/getRoomDetails
+post http://localhost:8888/.netlify/functions/createAccount
 Content-Type: application/json
 
 {
-    "userTokenID": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjViNjAyZTBjYTFmNDdhOGViZmQxMTYwNGQ5Y2JmMDZmNGQ0NWY4MmIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGxhdGludW1ob3N0ZWxzLWY1NGU2IiwiYXVkIjoicGxhdGludW1ob3N0ZWxzLWY1NGU2IiwiYXV0aF90aW1lIjoxNzA1NzU0ODExLCJ1c2VyX2lkIjoiUDRQU0liTThMbVZYUDlMR1g1Y0pCc1lEY05BMiIsInN1YiI6IlA0UFNJYk04TG1WWFA5TEdYNWNKQnNZRGNOQTIiLCJpYXQiOjE3MDU3NTg4MzQsImV4cCI6MTcwNTc2MjQzNCwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInRlc3RAdGVzdC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.O59EfyZFyoWkm9Y8OfwD4AWWhXzir6acoG4fFidaMf8gd0_x93ZihWodsd9gGjMmVU5tK7Y7Mbubm0y3KaVD0eT4c0bxZh1vOyOTEmn-urtp3RwZUkNQvLF-rEY7BrQ_mL7x8cjXTyBeaqxhj5sjKOwJXuJjgwyqxKSUzzqQAyGrJAT4_okznA7yAHQ6KMiZCPEZDCptbl1k23VtDnX8uN1ZzVFLyrhF-yI_4ATL5fVCBTej_0vITHN48uzV5F8cRFQrPrpOSMjs8HYNxYGYVZtTW3ra96qBSdgtrPqh6vi9WQFuUz_PU25jyfUgWXShlhkqYtVAdJgFgWwCtAfITA"
+    "fullName": "Alhassan",
+    "email":, 
+    "phoneNumber":, 
+    "password":, 
+    "confirmPassword":, 
+    "course":, 
+    "level":, 
+    "gender":, 
+    "hostelLocation":,
+    "roomType": 
 }

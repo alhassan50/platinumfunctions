@@ -1,6 +1,9 @@
 const validator = require('email-validator');
 
 exports.validateEmail = (email) => {
+    if (email == null) {
+        return "Your email is required.";
+    }
     if (email === "") {
         return "Your email is required.";
     }
@@ -13,15 +16,26 @@ exports.validateEmail = (email) => {
     return null; // Validation passed
 }
 
-exports.validatePhoneNumber = (phoneNumber) => {
-    const phoneNumberRegex = /^\d{10}$/;
-    if (phoneNumber === "") {
-        return null
-    } else if (phoneNumber.trim() !== "" && !phoneNumberRegex.test(phoneNumber)) {
-        return "Invalid phone number format";
+exports.validatePassword = (password, confirmPassword) => {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (password == null || password === "" || !passwordRegex.test(password) || password !== confirmPassword) {
+        return "Invalid password";
     }
     return null; // Validation passed
 }
+
+exports.validatePhoneNumber = (phoneNumber) => {
+    const phoneNumberRegex = /^\d{10}$/;
+
+    if (phoneNumber == null || phoneNumber === "") {
+        return "Invalid phone number";
+    } else if (!phoneNumberRegex.test(phoneNumber)) {
+        return "Invalid phone number format";
+    }
+
+    return null; // Validation passed
+};
 
 exports.validateSubject = (subject) => {
     if (subject === "") {
@@ -33,7 +47,10 @@ exports.validateSubject = (subject) => {
 }
 
 exports.validateFullName = (fullName) => {
-    if (fullName === "" || fullName.trim() === '') {
+    if (fullName == null || fullName === "" || fullName.trim() === '') {
+        /* console.log("fm n: ", fullName == null);
+        console.log("fn em:", fullName === "");
+        console.log(fullName.trim() === ''); */
         return "Full name cannot be empty";
     }
     if (fullName.length > 200) {
@@ -41,6 +58,36 @@ exports.validateFullName = (fullName) => {
     }
     return null; // Validation passed
 }
+
+exports.validateCourse = (course) => {
+    if (course == null || course === "" || course.trim() === '') {
+        return "Course cannot be empty";
+    }
+    if (course.length > 50) {
+        return "Pls your course cannot exceed 50 characters";
+    }
+    return null; // Validation passed
+}
+
+exports.validateLevel = (level) => {
+    if (level == null || level === "") {
+        return "Level cannot be empty";
+    }
+
+    const numericLevel = parseInt(level, 10);
+
+    if (isNaN(numericLevel)) {
+        return "Invalid level format";
+    }
+
+    // Assuming levels are multiples of 10 from 100 to 700
+    if (numericLevel < 100 || numericLevel > 700 || numericLevel % 10 !== 0) {
+        return "Invalid level";
+    }
+
+    return null; // Validation passed
+};
+
 
 exports.validateMessage = (message) => {
     if (message === "" || message.trim() === '') {
@@ -103,5 +150,6 @@ exports.validateGender = (gender) => {
     }
     return null; // Validation passed
 }
+
 
 
