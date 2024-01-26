@@ -80,13 +80,27 @@ exports.validateLevel = (level) => {
         return "Invalid level format";
     }
 
-    // Assuming levels are multiples of 10 from 100 to 700
     if (numericLevel < 100 || numericLevel > 700 || numericLevel % 10 !== 0) {
         return "Invalid level";
     }
 
     return null; // Validation passed
 };
+
+exports.validateRoomPrice = (roomPrice) => {
+    console.log(roomPrice)
+    if (roomPrice == null || roomPrice === "") {
+        return "Room price cannot be empty";
+    }
+
+    const numericRoomPrice = parseInt(roomPrice, 10);
+
+    if (numericRoomPrice !== 3500 && numericRoomPrice !== 5000 && numericRoomPrice !== 9000) {
+        return "Invalid room price";
+    }
+
+    return null; // Validation passed
+}
 
 
 exports.validateMessage = (message) => {

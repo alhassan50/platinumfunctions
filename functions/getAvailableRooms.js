@@ -56,7 +56,7 @@ exports.handler = async (event) => {
 
         const availableRoomsArray = await availableRooms(hostelLocation, roomType, gender);
 
-        //console.log("availableRoomsArray: ", availableRoomsArray);
+        console.log("availableRoomsArray: ", availableRoomsArray);
         
         return {
             statusCode: 200,
@@ -64,7 +64,7 @@ exports.handler = async (event) => {
             body: JSON.stringify({ availableRooms: availableRoomsArray})
         };
     } catch (error) {
-        //console.log(error)
+        console.log(error)
         return {
             statusCode: 500,
             headers: corsHeaderOptions,

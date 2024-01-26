@@ -1,9 +1,9 @@
 const validation = require("./validation")
 
 const validateAccountData = (accountData) => {
-    console.log("logging accountData");
+    /* console.log("logging accountData");
     console.log(accountData); // Log the entire object
-    console.log("done logging accountData");
+    console.log("done logging accountData"); */
 
     const {
         fullName, 
@@ -15,11 +15,12 @@ const validateAccountData = (accountData) => {
         level, 
         gender, 
         hostelLocation,
-        roomType
+        roomType,
+        roomPrice
     } = accountData;
 
     // Log individual properties
-    console.log("fullName:", fullName);
+    /* console.log("fullName:", fullName);
     console.log("email:", email);
     console.log("phoneNumber:", phoneNumber);
     console.log("password:", password);
@@ -28,7 +29,7 @@ const validateAccountData = (accountData) => {
     console.log("level:", level);
     console.log("gender:", gender);
     console.log("hostelLocation:", hostelLocation);
-    console.log("roomType:", roomType);
+    console.log("roomType:", roomType); */
 
     const validationResults = {
         fullName: validation.validateFullName(fullName), //done
@@ -40,6 +41,7 @@ const validateAccountData = (accountData) => {
         level: validation.validateLevel(level),
         gender: validation.validateGender(gender), //done
         hostelLocation: validation.validateHostelLocation(hostelLocation), //done
+        roomPrice: validation.validateRoomPrice(roomPrice), //done
     };
 
     /* console.log("validationResults ", validationResults); */

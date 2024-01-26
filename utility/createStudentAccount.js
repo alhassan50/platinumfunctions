@@ -8,19 +8,18 @@ const createStudentAccount = async (accountData) => {
       const userRecord = await firebaseAdminConfig.auth.createUser(
             {
                 email: email,
-                phoneNumber: formatPhoneNumber(phoneNumber, '233'), 
+                //phoneNumber: phoneNumber, 
+                phoneNumber: formatPhoneNumber(phoneNumber, '233'),
                 password: password,
                 displayName: fullName
             }
         );
 
-      const customToken = await firebaseAdminConfig.auth.createCustomToken(userRecord.uid)
-      //const uid = userRecord.getUid();
-      console.log("userRecord:::::::", userRecord);
-      console.log("customToken:::::::", customToken);
-      return customToken;
+      const uid = userRecord.uid
+      const customToken = await firebaseAdminConfig.auth.createCustomToken(uid)
+      return {customToken: customToken, uid: uid};
     } catch (error) {
-      console.log("error: ", error);
+      //console.log("::::::", error);
       throw error;
     }
   };

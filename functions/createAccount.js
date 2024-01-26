@@ -1,6 +1,7 @@
 const cors = require("cors")
 const validateAccountData = require("../utility/validateAccountData")
 const createStudentAccount = require("../utility/createStudentAccount");
+const addStudent = require("../utility/addStudent")
 
 const corsHeaderOptions = {
     'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
@@ -23,7 +24,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 405,
             headers: corsHeaderOptions,
-            body: JSON.stringify({ error: 'Request Method Denied'})
+            body: JSON.stringify('Request Method Denied')
         };
     }
 
@@ -32,7 +33,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 400,
             headers: corsHeaderOptions,
-            body: JSON.stringify({ error: 'Empty request body.' }),
+            body: JSON.stringify('Empty request body.'),
         };
     }
 
@@ -40,44 +41,91 @@ exports.handler = async (event) => {
         let studentAccountData
 
         try {
-            const {studentData} = JSON.parse(event.body)
+            const studentData = JSON.parse(event.body)
             studentAccountData = studentData
 
             const isStudentDataValid = validateAccountData(studentData).isValid
 
             if (!isStudentDataValid) {
-                throw new Error(`Invalid account data.`);
+                throw new Error(`Invalid booking data.`);
             }
         } catch (error) {
+            console.log(error);
             return {
                 statusCode: 400,
                 headers: corsHeaderOptions,
-                body: JSON.stringify({ error: `${error}` }),
+                body: JSON.stringify(`${error.message}`),
             };
         }
 
-        console.log("studentAccountData: ", studentAccountData);
+        //console.log("studentAccountData: ", studentAccountData);
+
+        let customToken = null
+        let uid = null
+        
+        try {
+            const accountIdObj = await createStudentAccount(studentAccountData)
+            customToken = accountIdObj.customToken
+            uid = accountIdObj.uid
+
+            /* console.log(customToken);
+            console.log(uid); */
+        } catch (error) {
+            if (error.errorInfo.code && error.errorInfo.code === 'auth/email-already-exists') {
+                return {
+                    statusCode: 400,
+                    headers: corsHeaderOptions,
+                    body: JSON.stringify("Email address already in use. Log in or reset password.")
+                };
+            }
+            
+            if (error.errorInfo.code && error.errorInfo.code === 'auth/phone-number-already-exists') {
+                return {
+                    statusCode: 400,
+                    headers: corsHeaderOptions,
+                    body: JSON.stringify("Phone number already in use. Log in or reset password.")
+                };
+            }
+            console.log('deleting account....');
+            throw error
+        }
+
+        if (!customToken) {
+            throw new Error('Invalid custom token')
+        }
+
+        if (!uid) {
+            throw new Error('Invalid UID')
+        }
 
         try {
-            const uid = await createStudentAccount(studentAccountData)
-            console.log('main uid: ', uid);
+            await addStudent(studentAccountData, uid)
         } catch (error) {
-            console.log(error);
-            throw new Error (error)
+            throw error
         }
-        
 
+        //successful process 
         return {
             statusCode: 202,
             headers: corsHeaderOptions,
-            body: JSON.stringify('success')
+            body: JSON.stringify({customToken: customToken})
         };
     } catch (error) {
-        //console.log(error)
+        console.log("::::::::::::::::::::::", error);
+        console.log("::::::::::::::::::::::::::::::::::::::::", error.errorInfo.message);
+
+        if (error.errorInfo.code && error.errorInfo.code === 'app/network-error') {
+            return {
+                statusCode: 500,
+                headers: corsHeaderOptions,
+                body: JSON.stringify("Oops! Something went wrong. Please check your internet connection and try again.")
+            };
+        }
+
         return {
             statusCode: 500,
             headers: corsHeaderOptions,
-            body: JSON.stringify({ error: `Failed to get room details.`})
+            body: JSON.stringify('Oops! Something went wrong while creating your account.')
         };
     }
 }

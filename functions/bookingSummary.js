@@ -39,13 +39,14 @@ exports.handler = async (event) => {
     try {
         const payload = JSON.parse(event.body)
         const userTokenID = payload.userTokenID
-        //console.log("summary: ", userTokenID);
+        //console.log("userTokenID: ", userTokenID);
 
         //authenticates user
         let studentID = null
         try { 
             studentID = await authenticateUser(userTokenID)
         } catch (error) {
+            console.log(error)
             return {
                 statusCode: 401,
                 headers: corsHeaderOptions,
@@ -67,7 +68,7 @@ exports.handler = async (event) => {
             body: JSON.stringify(bookingSummary)
         };
     } catch (error) {
-        //console.log(error)
+        console.log(error)
         return {
             statusCode: 500,
             headers: corsHeaderOptions,

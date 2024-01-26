@@ -18,7 +18,7 @@ const getDate = (timestamp) => {
 
 const getBookingSummary = async (studentID) => {
 
-    let studentRef = firebaseAdminConfig.db.collection("student").doc(studentID)
+    let studentRef = firebaseAdminConfig.db.collection("students").doc(studentID)
 
     try {
         const student = await studentRef.get()
