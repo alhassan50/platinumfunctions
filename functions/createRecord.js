@@ -80,8 +80,13 @@ exports.handler = async (event) => {
         }
 
         try {
+            console.log('adding student...');
             await addStudent(studentAccountData, studentUID)
+            console.log('done adding student...');
+
+            console.log('creating custom token...');
             customToken = await firebaseAdminConfig.auth.createCustomToken(studentUID)
+            console.log('done creating custom token...');
         } catch (error) {
             throw error
         }
