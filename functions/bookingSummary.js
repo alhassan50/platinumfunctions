@@ -39,7 +39,7 @@ exports.handler = async (event) => {
     try {
         const payload = JSON.parse(event.body)
         const userTokenID = payload.userTokenID
-        //console.log("userTokenID: ", userTokenID);
+        console.log("userTokenID: ", userTokenID);
 
         //authenticates user
         let studentID = null

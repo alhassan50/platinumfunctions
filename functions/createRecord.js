@@ -44,8 +44,8 @@ exports.handler = async (event) => {
         let customToken = null
 
         try {
-            console.log(event.body);
             const {accountData, uid} = JSON.parse(event.body)
+            
             studentAccountData = accountData
             studentUID = uid
 
@@ -93,6 +93,9 @@ exports.handler = async (event) => {
                 body: JSON.stringify('Invalid custom token')
             };
         }
+
+        console.log(studentAccountData);
+        console.log(studentUID);
 
         //successful process 
         return {

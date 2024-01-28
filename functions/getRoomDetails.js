@@ -46,7 +46,7 @@ exports.handler = async (event) => {
         let studentID = null
         try { 
             studentID = await authenticateUser(userTokenID)
-            //console.log(studentID);
+            console.log(studentID);
         } catch (error) {
             console.log( error)
             return {

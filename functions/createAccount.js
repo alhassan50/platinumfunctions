@@ -68,8 +68,8 @@ exports.handler = async (event) => {
             //customToken = accountIdObj.customToken
             uid = accountIdObj.uid
 
-            /* console.log(customToken);
-            console.log(uid); */
+            //console.log(customToken);
+            //console.log(uid);
         } catch (error) {
             if (error.errorInfo.code && error.errorInfo.code === 'auth/email-already-exists') {
                 return {
@@ -93,19 +93,11 @@ exports.handler = async (event) => {
             throw error
         }
 
-        /* if (!customToken) {
-            throw new Error('Invalid custom token')
-        } */
-
         if (!uid) {
             throw new Error('Invalid UID')
         }
 
-        /* try {
-            await addStudent(studentAccountData, uid)
-        } catch (error) {
-            throw error
-        } */
+        console.log(uid);
 
         //successful process 
         return {
