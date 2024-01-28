@@ -1,9 +1,9 @@
 const validation = require("./validation")
 
 const validateAccountData = (accountData) => {
-    /* console.log("logging accountData");
+    console.log("logging accountData");
     console.log(accountData); // Log the entire object
-    console.log("done logging accountData"); */
+    console.log("done logging accountData");
 
     const {
         fullName, 

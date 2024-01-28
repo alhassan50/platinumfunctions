@@ -1,7 +1,8 @@
 const cors = require("cors")
 const validateAccountData = require("../utility/validateAccountData")
-const createStudentAccount = require("../utility/createStudentAccount");
+const firebaseAdminConfig = require("../config/firebaseAdminConfig") 
 const addStudent = require("../utility/addStudent")
+const validateAccount = require("../utility/validateAccount")
 
 const corsHeaderOptions = {
     'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
@@ -38,15 +39,19 @@ exports.handler = async (event) => {
     }
 
     try {
-        let studentAccountData
+        let studentAccountData = null
+        let studentUID = null
+        let customToken = null
 
         try {
-            const studentData = JSON.parse(event.body)
-            studentAccountData = studentData
+            console.log(event.body);
+            const {accountData, uid} = JSON.parse(event.body)
+            studentAccountData = accountData
+            studentUID = uid
 
-            const isStudentDataValid = validateAccountData(studentData).isValid
+            const isAccountDataValid = validateAccountData(accountData).isValid
 
-            if (!isStudentDataValid) {
+            if (!isAccountDataValid) {
                 throw new Error(`Invalid booking data.`);
             }
         } catch (error) {
@@ -58,64 +63,45 @@ exports.handler = async (event) => {
             };
         }
 
-        //console.log("studentAccountData: ", studentAccountData);
-
-        //let customToken = null
-        let uid = null
-        
+        //validate uid
         try {
-            const accountIdObj = await createStudentAccount(studentAccountData)
-            //customToken = accountIdObj.customToken
-            uid = accountIdObj.uid
+            isAccountValid = validateAccount(studentAccountData, studentUID)
 
-            /* console.log(customToken);
-            console.log(uid); */
+            if (!isAccountValid) {
+                throw new Error("Couldn't find Account")
+            }
         } catch (error) {
-            if (error.errorInfo.code && error.errorInfo.code === 'auth/email-already-exists') {
-                return {
-                    statusCode: 400,
-                    headers: corsHeaderOptions,
-                    body: JSON.stringify("Email address already in use. Log in or reset password.")
-                };
-            }
-            
-            if (error.errorInfo.code && error.errorInfo.code === 'auth/phone-number-already-exists') {
-                return {
-                    statusCode: 400,
-                    headers: corsHeaderOptions,
-                    body: JSON.stringify("Phone number already in use. Log in or reset password.")
-                };
-            }
-
-            //delete user account
-            console.log('deleting account....');
-
-            throw error
+            console.log(error);
+            return {
+                statusCode: 400,
+                headers: corsHeaderOptions,
+                body: JSON.stringify(`${error.message}`),
+            }; 
         }
 
-        /* if (!customToken) {
-            throw new Error('Invalid custom token')
-        } */
-
-        if (!uid) {
-            throw new Error('Invalid UID')
-        }
-
-        /* try {
-            await addStudent(studentAccountData, uid)
+        try {
+            await addStudent(studentAccountData, studentUID)
+            customToken = await firebaseAdminConfig.auth.createCustomToken(studentUID)
         } catch (error) {
             throw error
-        } */
+        }
+        
+        if (!customToken) {
+            return {
+                statusCode: 500,
+                headers: corsHeaderOptions,
+                body: JSON.stringify('Invalid custom token')
+            };
+        }
 
         //successful process 
         return {
             statusCode: 202,
             headers: corsHeaderOptions,
-            body: JSON.stringify({accountData: studentAccountData, uid: uid})
+            body: JSON.stringify({customToken: customToken})
         };
     } catch (error) {
-        console.log("::::::::::::::::::::::", error);
-        console.log("::::::::::::::::::::::::::::::::::::::::", error.errorInfo.message);
+        console.log(error);
 
         if (error.errorInfo.code && error.errorInfo.code === 'app/network-error') {
             return {

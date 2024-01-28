@@ -11,7 +11,7 @@ OAuth2_client.setCredentials({refresh_token: process.env.REFRESH_TOKEN})
 require('dotenv').config();
 
 const corsHeaderOptions = {
-    /* 'Access-Control-Allow-Origin': 'http://localhost:3000', */
+    //'Access-Control-Allow-Origin': 'http://localhost:3000',
     'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
