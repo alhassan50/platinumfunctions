@@ -19,6 +19,8 @@ const addStudent = async (studentData, uid) => {
     };
 
     try {
+        console.log("STUDENT UID: ", uid);
+        console.log("STUDENT DATA: ", studentData);
         const studentDocRef = studentCollection.doc(uid);
         studentDocRef.set(studentFirestoreData)
     } catch (error) {
