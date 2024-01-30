@@ -10,12 +10,7 @@ const validateAccount = async (studentData, uid) => {
         isAccountValid = isAccountValid && userAccountRecord.email === studentData.email
         isAccountValid = userAccountRecord.phoneNumber !== studentData.phoneNumber
 
-        /* if (!isAccountValid) {
-            throw "Couldn't find Account"
-        } */
-
         return isAccountValid
-
     } catch (error) {
         console.log(error);
         throw error

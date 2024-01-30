@@ -3,7 +3,6 @@ const formatPhoneNumber = require("./formartPhoneNumber");
 
 const createStudentAccount = async (accountData) => {
     const {email, phoneNumber, password, fullName} = accountData
-    //console.log(email," ", phoneNumber," ", password," ", fullName);
     try {
       const userRecord = await firebaseAdminConfig.auth.createUser(
             {
@@ -16,11 +15,8 @@ const createStudentAccount = async (accountData) => {
         );
 
       const uid = userRecord.uid
-      //const customToken = await firebaseAdminConfig.auth.createCustomToken(uid)
       return {uid: uid};
-      //return {customToken: customToken, uid: uid};
     } catch (error) {
-      //console.log("::::::", error);
       throw error;
     }
   };

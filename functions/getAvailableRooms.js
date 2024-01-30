@@ -55,8 +55,6 @@ exports.handler = async (event) => {
         }
 
         const availableRoomsArray = await availableRooms(hostelLocation, roomType, gender);
-
-        console.log("availableRoomsArray: ", availableRoomsArray);
         
         return {
             statusCode: 200,

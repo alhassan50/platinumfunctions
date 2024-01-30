@@ -1,8 +1,6 @@
 const firebaseAdminConfig = require("../config/firebaseAdminConfig")
 
 const getRoom = async (roomID) => {
-    /* console.log(roomID); */
-
     let roomRef = firebaseAdminConfig.db.collection("rooms").doc(roomID)
 
     try {

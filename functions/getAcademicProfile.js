@@ -39,7 +39,6 @@ exports.handler = async (event) => {
     try {
         const payload = JSON.parse(event.body)
         const userTokenID = payload.userTokenID
-        //console.log("userTokenID: ", userTokenID);
 
         //authenticates user
         let studentID = null
@@ -59,8 +58,6 @@ exports.handler = async (event) => {
         if (academicProfile.error) {
             throw new Error(`${academicProfile.error}`)
         }
-        
-        //console.log("academicProfile: ", academicProfile);
 
         return {
             statusCode: 200,

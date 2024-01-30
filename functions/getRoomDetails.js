@@ -46,7 +46,6 @@ exports.handler = async (event) => {
         let studentID = null
         try { 
             studentID = await authenticateUser(userTokenID)
-            console.log("studentID: ", studentID);
         } catch (error) {
             console.log( error)
             return {
@@ -57,10 +56,7 @@ exports.handler = async (event) => {
         }
 
         const studentRoomID = await getStudentRoomID(studentID);
-        //console.log("studentRoomID: ", studentRoomID);
-
         const room = await getRoom(studentRoomID);
-        //console.log(room);
    
         if (room.error) {
             throw new Error(`${room.error}`)
@@ -72,7 +68,7 @@ exports.handler = async (event) => {
             body: JSON.stringify(room)
         };
     } catch (error) {
-        //console.log(error)
+        console.log(error)
         return {
             statusCode: 500,
             headers: corsHeaderOptions,

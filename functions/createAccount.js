@@ -58,18 +58,12 @@ exports.handler = async (event) => {
             };
         }
 
-        //console.log("studentAccountData: ", studentAccountData);
-
         //let customToken = null
         let uid = null
         
         try {
             const accountIdObj = await createStudentAccount(studentAccountData)
-            //customToken = accountIdObj.customToken
             uid = accountIdObj.uid
-
-            //console.log(customToken);
-            //console.log(uid);
         } catch (error) {
             if (error.errorInfo.code && error.errorInfo.code === 'auth/email-already-exists') {
                 return {
@@ -97,8 +91,6 @@ exports.handler = async (event) => {
             throw new Error('Invalid UID')
         }
 
-        console.log(uid);
-
         //successful process 
         return {
             statusCode: 202,
@@ -107,7 +99,6 @@ exports.handler = async (event) => {
         };
     } catch (error) {
         console.log("::::::::::::::::::::::", error);
-        console.log("::::::::::::::::::::::::::::::::::::::::", error.errorInfo.message);
 
         if (error.errorInfo.code && error.errorInfo.code === 'app/network-error') {
             return {

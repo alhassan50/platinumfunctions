@@ -7,11 +7,7 @@ const validateAvailableRoomsParams = (hostelLocation, roomType, gender) => {
         gender : validation.validateGender(gender)
     }
 
-    /* console.log("validationResults: ", validationResults); */
-
     const invalidParams = Object.keys(validationResults).filter(params => validationResults[params] !== null);
-
-    /* console.log("invalidParams: ", invalidParams); */
 
     if (invalidParams.length > 0) {
         return {
