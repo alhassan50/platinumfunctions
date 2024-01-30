@@ -25,7 +25,7 @@ const validateAccountData = (accountData) => {
         level: validation.validateLevel(level),
         gender: validation.validateGender(gender), //done
         hostelLocation: validation.validateHostelLocation(hostelLocation), //done
-        roomPrice: validation.validateRoomPrice(roomPrice), //done
+        roomType: validation.validateRoomType(roomType), //done
     };
 
     // Check for validation failures

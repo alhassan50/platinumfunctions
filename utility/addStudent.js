@@ -2,7 +2,7 @@ const firebaseAdminConfig = require("../config/firebaseAdminConfig")
 
 const addStudent = async (studentData, uid) => {
     try {
-        const {gender, roomID, level, course, roomPrice} = studentData
+        const {gender, roomID, level, course, roomPrice, roomType} = studentData
     
         const studentCollection = firebaseAdminConfig.db.collection('students')
     
@@ -13,8 +13,11 @@ const addStudent = async (studentData, uid) => {
             course: course,
             amountPaid: 0,
             amountRemaining: roomPrice,
+            roomPrice: roomPrice,
+            roomType: roomType,
             bookingDate: new Date(),
             paymentDeadline: new Date(),
+            paymentHistory: []
             /* paymentDeadline: new Date('2024-02-01').getTime(), */
         };
 

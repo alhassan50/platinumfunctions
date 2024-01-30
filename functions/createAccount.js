@@ -38,6 +38,8 @@ exports.handler = async (event) => {
     }
 
     try {
+        console.log(event.body)
+
         let studentAccountData
 
         try {
