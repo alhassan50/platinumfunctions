@@ -80,9 +80,9 @@ exports.handler = async (event) => {
         }
 
         try {
-            console.log('adding student...');
+            console.log('adding student...........');
             await addStudent(studentAccountData, studentUID)
-            console.log('done adding student...');
+            console.log('done adding student...........');
 
             console.log('creating custom token...');
             customToken = await firebaseAdminConfig.auth.createCustomToken(studentUID)
@@ -99,8 +99,9 @@ exports.handler = async (event) => {
             };
         }
 
-        console.log(studentAccountData);
-        console.log(studentUID);
+        console.log("studentAccountData:::::::: ", studentAccountData);
+        console.log("studentUID::::::::::: ", studentUID);
+        console.log("customToken::::::::::: ", customToken);
 
         //successful process 
         return {

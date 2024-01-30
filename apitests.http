@@ -1,15 +1,17 @@
-post http://localhost:8888/.netlify/functions/createAccount
+post http://localhost:8888/.netlify/functions/createRecord
 Content-Type: application/json
 
 {
-    "fullName": "Alhassan",
-    "email":, 
-    "phoneNumber":, 
-    "password":, 
-    "confirmPassword":, 
-    "course":, 
-    "level":, 
-    "gender":, 
-    "hostelLocation":,
-    "roomType": 
+  "fullName": "Abdullahi Alhassan Baaba",
+  "phoneNumber": "0557169843",
+  "gender": "male",
+  "course": "Bsc Computer Science",
+  "level": "300",
+  "email": "abdullahialhassanbaaba@gmail.com",
+  "password": "alhassan@1",
+  "confirmPassword": "alhassan@1",
+  "hostelLocation": "ayeduase",
+  "roomType": "single",
+  "roomID": "relj7zsZzr00dq5K0cxS",
+  "roomPrice": 9000
 }
