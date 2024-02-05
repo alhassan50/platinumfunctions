@@ -4,8 +4,8 @@ const validateAvailableRoomsParams = require("../utility/validateAvailableRoomsP
 const availableRooms = require("../utility/availableRooms")
 
 const corsHeaderOptions = {
-    'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
-    //'Access-Control-Allow-Origin': 'http://localhost:3000',
+    //'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
+    'Access-Control-Allow-Origin': 'http://localhost:3000',
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };

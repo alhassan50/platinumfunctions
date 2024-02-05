@@ -1,5 +1,5 @@
-const getPaymentDetails = require("../utility/getPaymentDetails")
-const authenticateUser = require("../utility/authenticateUser")
+const setProfileInfo = require("../utility/setProfileInfo")
+const validateProfileInfo = require("../utility/validateProfileInfo")
 
 const corsHeaderOptions = {
     //'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
@@ -18,11 +18,11 @@ exports.handler = async (event) => {
     }
 
     // Handles request that aren't POST
-    if (event.httpMethod !== 'POST') {
+    if (event.httpMethod !== 'PUT') {
         return {
             statusCode: 405,
             headers: corsHeaderOptions,
-            body: JSON.stringify({ error: 'Request Method Denied'})
+            body: JSON.stringify('Request Method Denied')
         };
     }
 
@@ -31,13 +31,20 @@ exports.handler = async (event) => {
         return {
             statusCode: 400,
             headers: corsHeaderOptions,
-            body: JSON.stringify({ error: 'Empty request body.' }),
+            body: JSON.stringify('Empty request body.'),
         };
     }
 
     try {
         const payload = JSON.parse(event.body)
+        //const payload = event.body
+
         const userTokenID = payload.userTokenID
+        const profileInfo = payload.profileInfo
+
+        console.log("payload: ", payload);
+        console.log("userTokenID: ", userTokenID);
+        console.log("profileInfo: ", profileInfo);
 
         //authenticates user
         let studentID = null
@@ -48,27 +55,44 @@ exports.handler = async (event) => {
             return {
                 statusCode: 401,
                 headers: corsHeaderOptions,
-                body: JSON.stringify({ error: 'User not authorized.' }),
+                body: JSON.stringify('User not authorized.'),
             };
         }
 
-        const paymentDetails = await getPaymentDetails(studentID);
+        let validProfileInfo = null
+        try { 
+            let validationResult = validateProfileInfo(profileInfo)
+            if (validationResult.isValid) {
+                validProfileInfo = validationResult.validProfileInfo
+            } else {
+                throw new Error('Invalid profile info')
+            }
+        } catch (error) {
+            console.log(error)
+            return {
+                statusCode: 400,
+                headers: corsHeaderOptions,
+                body: JSON.stringify('Invalid profile params.'),
+            };
+        }
+
+        const userRecord = await setProfileInfo(validProfileInfo, studentID);
         
-        if (paymentDetails.error) {
-            throw new Error(`${paymentDetails.error}`)
+        if (userRecord.error) {
+            throw new Error(`${userRecord.error}`)
         }
 
         return {
             statusCode: 200,
             headers: corsHeaderOptions,
-            body: JSON.stringify(paymentDetails)
+            body: JSON.stringify(userRecord)
         };
     } catch (error) {
         console.log(error)
         return {
             statusCode: 500,
             headers: corsHeaderOptions,
-            body: JSON.stringify({ error: `An unexpected error occurred while fetching your booking summary.`})
+            body: JSON.stringify(`Something went wrong while updating your profile`)
         };
     }
 }
