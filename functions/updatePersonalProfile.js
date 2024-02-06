@@ -1,10 +1,11 @@
-const setProfileInfo = require("../utility/setProfileInfo")
+const setPersonalProfileInfo = require("../utility/setPersonalProfileInfo")
 const validateProfileInfo = require("../utility/validateProfileInfo")
+const authenticateUser = require("../utility/authenticateUser")
 
 const corsHeaderOptions = {
     //'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
     'Access-Control-Allow-Origin': 'http://localhost:3000',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'PUT, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
 
@@ -42,9 +43,9 @@ exports.handler = async (event) => {
         const userTokenID = payload.userTokenID
         const profileInfo = payload.profileInfo
 
-        console.log("payload: ", payload);
+        /* console.log("payload: ", payload);
         console.log("userTokenID: ", userTokenID);
-        console.log("profileInfo: ", profileInfo);
+        console.log("profileInfo: ", profileInfo); */
 
         //authenticates user
         let studentID = null
@@ -76,7 +77,7 @@ exports.handler = async (event) => {
             };
         }
 
-        const userRecord = await setProfileInfo(validProfileInfo, studentID);
+        const userRecord = await setPersonalProfileInfo(validProfileInfo, studentID);
         
         if (userRecord.error) {
             throw new Error(`${userRecord.error}`)

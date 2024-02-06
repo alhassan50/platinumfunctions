@@ -1,17 +1,13 @@
-post http://localhost:8888/.netlify/functions/createRecord
+put http://localhost:8888/.netlify/functions/updateProfile
 Content-Type: application/json
 
 {
-  "fullName": "Abdullahi Alhassan Baaba",
-  "phoneNumber": "0557169843",
-  "gender": "male",
-  "course": "Bsc Computer Science",
-  "level": "300",
-  "email": "abdullahialhassanbaaba@gmail.com",
-  "password": "alhassan@1",
-  "confirmPassword": "alhassan@1",
-  "hostelLocation": "ayeduase",
-  "roomType": "single",
-  "roomID": "relj7zsZzr00dq5K0cxS",
-  "roomPrice": 9000
+  "userTokenID": "11111111111111111111111111111",
+  "profileInfo": {
+    "fullName": "Abdullahi Alhassan Baaba",
+    "phoneNumber": "0557169843",
+    "course": "Bsc Computer Science",
+    "level": "300",
+    "email": "abdullahialhassanbaaba@gmail.com",
+  }
 }
