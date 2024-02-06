@@ -26,16 +26,25 @@ exports.validatePassword = (password, confirmPassword) => {
 }
 
 exports.validatePhoneNumber = (phoneNumber) => {
-    const phoneNumberRegex = /^\d{10}$/;
-
     if (phoneNumber == null || phoneNumber === "") {
         return "Invalid phone number";
-    } else if (!phoneNumberRegex.test(phoneNumber)) {
-        return "Invalid phone number format";
+    }
+
+    if (phoneNumber.startsWith("+233")) {
+        const plus233Regex = /^\+233\d{9}$/;
+        if (!plus233Regex.test(phoneNumber)) {
+            return "Invalid +233 phone number format";
+        }
+    } else {
+        const defaultRegex = /^\d{10}$/;
+        if (!defaultRegex.test(phoneNumber)) {
+            return "Invalid phone number format";
+        }
     }
 
     return null; // Validation passed
 };
+
 
 exports.validateSubject = (subject) => {
     if (subject === "") {

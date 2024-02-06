@@ -77,16 +77,16 @@ exports.handler = async (event) => {
             };
         }
 
-        const userRecord = await setPersonalProfileInfo(validProfileInfo, studentID);
+        const user = await setPersonalProfileInfo(validProfileInfo, studentID);
         
-        if (userRecord.error) {
-            throw new Error(`${userRecord.error}`)
+        if (user.error) {
+            throw new Error(`${user.error}`)
         }
 
         return {
             statusCode: 200,
             headers: corsHeaderOptions,
-            body: JSON.stringify(userRecord)
+            body: JSON.stringify(user)
         };
     } catch (error) {
         console.log(error)

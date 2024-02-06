@@ -11,7 +11,11 @@ const setPersonalProfileInfo = async (validProfileData, uid) => {
             ...validProfileData
         }
       );
-      return userRecord
+
+      // Reload the user to ensure the client-side user object is updated
+      const user = await firebaseAdminConfig.auth.getUser(uid);
+
+      return user
     } catch (error) {
       throw error;
     }
