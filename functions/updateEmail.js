@@ -3,8 +3,8 @@ const authenticateUser = require("../utility/authenticateUser")
 const validation = require("../utility/validation")
 
 const corsHeaderOptions = {
-    //'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
-    'Access-Control-Allow-Origin': 'http://localhost:3000',
+    'Access-Control-Allow-Origin': 'https://platinumhostels.vercel.app',
+    //'Access-Control-Allow-Origin': 'http://localhost:3000',
     'Access-Control-Allow-Methods': 'PUT, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
